@@ -8,12 +8,21 @@ $(document).ready(function() {
         e.preventDefault();
         loadDistricts($(this).val());
         resetCities();
+        resetClients();
 
     });
 
     $("#search-panel").on("change", "#dist_name", function(e) {
         e.preventDefault();
         loadCities($(this).val());
+        resetClients();
+
+    });
+
+    $("#search-panel").on("change", "#city_name", function(e) {
+        e.preventDefault();
+        resetClients();
+        loadClients($(this).val());
 
     });
 
@@ -78,6 +87,7 @@ $(document).ready(function() {
     function addDisticts(districts) {
 
         var defaultDistrictOption = '<option value="" disabled selected>Select a District</option>';
+        var emptyOption = "<option value='' disabled selected>No Districts Found</option>";
         var districtOption = "";
 
         $.each(districts, function(index, district) {
@@ -86,8 +96,11 @@ $(document).ready(function() {
 
         });
 
-        $("#dist_name").html(defaultDistrictOption + districtOption);
-
+        if (districtOption === '') {
+            $("#dist_name").html(emptyOption);
+        } else {
+            $("#dist_name").html(defaultDistrictOption + districtOption);
+        }
 
     }
 
@@ -131,9 +144,66 @@ $(document).ready(function() {
 
     }
 
+    function loadClients(clientID) {
+
+        var apiURL = mainSettings.apiURLs.getClients + "/" + clientID;
+        //console.log(apiURL);
+
+        $.ajax({
+            url: apiURL,
+            method: "GET",
+        }).done(function(data, status) {
+            if (status === "success") {
+                addClients(JSON.parse(data));
+                //console.log(JSON.parse(data));
+            } else {
+                console.error("API Failed");
+            }
+        }).fail(function(jqXHR, textStatus, errorThrown) {
+            console.error("API Failed");
+        });
+
+    }
+
+    function addClients(clients) {
+
+        var defaultClientOption = '<option value="" disabled selected>Select a Client</option>';
+        var emptyOption = "<option value='' disabled selected>No Clients Found</option>";
+        var clientsOption = "";
+
+        $.each(clients, function(index, client) {
+
+            clientsOption += '<option value="' + client.clients_name + '">' + client.clients_name + '</option>';
+
+        });
+
+        if (clientsOption === '') {
+            $("#clients_name").html(emptyOption);
+        } else {
+            $("#clients_name").html(defaultClientOption + clientsOption);
+            clientsSearch();
+        }
+
+
+    }
+
     function resetCities() {
         var resetOption = "<option value='' disabled selected>Select a District First</option>";
         $("#city_name").html(resetOption);
+    }
+
+    function resetClients() {
+        var resetOption = '<label for="clients_name">Name :</label>' +
+            '<select name="clients_name" id="clients_name"  class="form-control">' +
+            '<option value="" disabled selected>Select a City First</option>' +
+            '</select>';
+        $("#client_area").html(resetOption);
+    }
+
+    function clientsSearch() {
+        $("#clients_name").selectize({
+            sortField: 'text',
+        });
     }
 
 });

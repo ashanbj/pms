@@ -6,5 +6,6 @@ var mainSettings = {
         getPrice: "/get-price",
         getCategory: "/get-product-category",
         getProvince: "/get-province",
+        getClients: "/get-clients",
     }
 }

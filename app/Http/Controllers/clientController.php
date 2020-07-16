@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 
 class clientController extends Controller
 {
+
     public function search(Request $request) {
 
         if( !isset($request->pro_name) && !isset($request->city_name) && !isset($request->dist_name) && !isset($request->clients_name) ) {
@@ -218,4 +219,11 @@ class clientController extends Controller
         return redirect()->action('dashController@view');
 
     }
+
+    public function get($id) {
+        $city = Client::where('city_name', $id)->get()->toJson();
+
+        return response()->json($city);
+    }
+
 }

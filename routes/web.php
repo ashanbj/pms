@@ -89,3 +89,4 @@ Route::get('/get-price/{id}','Company\productController@get'); ///api routs
 Route::get('/get-products','Company\productController@getProduct'); ///api routs
 Route::get('/get-product-category','Chemist\orderController@getCategory'); ///api routs
 Route::get('/get-province','provinceConroller@get'); ///api routs
+Route::get('/get-clients/{id}','clientController@get');

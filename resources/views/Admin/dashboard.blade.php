@@ -126,9 +126,11 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <div class="form-group">
+                                            <div class="form-group" id="client_area">
                                                 <label for="clients_name">Name :</label>
-                                                <input type="text" class="form-control" name="clients_name" id="clients_name" placeholder="Enter clients name...">
+                                                <select name="clients_name" id="clients_name"  class="form-control">
+                                                    <option value="" disabled selected>Select a City First</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
