@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Company;
-use Session;
+use Illuminate\Support\Facades\Session;
 use App\Company_product;
 use App\Email;
 use App\Http\Controllers\Controller;

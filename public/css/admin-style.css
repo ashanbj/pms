@@ -34,6 +34,10 @@ body {
     position: relative;
 }
 
+.navbar .navbar-nav .nav-link:not(.btn) {
+    padding: .5rem;
+}
+
 .form-group .btn {
     background: blueviolet;
 }

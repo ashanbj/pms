@@ -18,6 +18,12 @@ class cityController extends Controller
     }
 
     public function create(Request $request) {
+
+        $this->validate($request,[
+            'city_no'=>'required|max:4|min:3|unique:\App\City',
+            'city_name'=>'required|max:100|min:5|unique:\App\City'
+        ]);
+
         $city=new City();
         $city->city_no=$request->city_no;
         $city->city_name=$request->city_name;
@@ -29,7 +35,13 @@ class cityController extends Controller
         return redirect()->back()->with('message', 'successfully added');
 
     }
-     public function edit(Request $request) {
+
+    public function viewedit() {
+        $cities =  City::where('status','active')->get();
+        return view('Admin.edit-cities')->with('city', $cities);
+    }
+
+    public function edit(Request $request) {
         
         $city = City::find($request->id);
         $city->city_no=$request->city_no;
@@ -42,7 +54,8 @@ class cityController extends Controller
         return redirect()->back()->with('emessage', 'successfully edited');
 
     }
-     public function delete(Request $request) {
+
+    public function delete(Request $request) {
         
         $city = City::find($request->did);
         $city->status='deactive';

@@ -37,14 +37,20 @@ Route::get('/logout','userController@logout');
 //admin routes
 Route::get('/admin/dashboard', 'dashController@view')->middleware('admin_check');
 Route::get('/admin/add-province', 'provinceConroller@view')->middleware('admin_check');
+Route::get('/admin/edit-province', 'provinceConroller@viewedit')->middleware('admin_check');
 Route::get('/admin/add-district', 'districtController@view')->middleware('admin_check');
+Route::get('/admin/edit-district', 'districtController@viewedit')->middleware('admin_check');
 Route::get('/admin/add-cities', 'cityController@view')->middleware('admin_check');
+Route::get('/admin/edit-cities', 'cityController@viewedit')->middleware('admin_check');
 Route::get('/admin/add-companies','companyController@view')->middleware('admin_check');
 Route::get('/admin/add-products','productController@view')->middleware('admin_check');
+Route::get('/admin/edit-product-category','productController@viewedit')->middleware('admin_check');
 Route::get('/admin/view-orders','orderController@view')->middleware('admin_check');
 
 Route::post('/create-province','provinceConroller@create');
+Route::post('/edit-province-data','provinceConroller@edit');
 Route::post('/create-district','districtController@create');
+Route::post('/edit-district-data','districtController@edit');
 Route::post('/create-city','cityController@create');
 Route::post('/create-company','companyController@create');
 Route::post('/edit-city','cityController@edit');
@@ -90,3 +96,4 @@ Route::get('/get-products','Company\productController@getProduct'); ///api routs
 Route::get('/get-product-category','Chemist\orderController@getCategory'); ///api routs
 Route::get('/get-province','provinceConroller@get'); ///api routs
 Route::get('/get-clients/{id}','clientController@get');
+Route::get('/get-companytwo/{id}','companyController@gettwo');

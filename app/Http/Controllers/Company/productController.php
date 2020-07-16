@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Company;
 
+use App\Client;
 use Illuminate\Support\Facades\Session;
 use App\Product;
 use App\Company_product;
@@ -9,8 +10,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class productController extends Controller
-{
+class productController extends Controller {
+
     public function view() {
         $user=Session::get('user_id');
         //$product=Company_product::where('status','active')->where('company_id',$user)->get();
@@ -56,10 +57,28 @@ class productController extends Controller
     }
 
     public function getProduct() {
-        
-        $product = Company_product::where('status', 'active')->get()->toJson();
 
-        return response()->json($product);
+        $user=Session::get('user_id');
+        
+        $companies=Client::where('clients_id',$user)->get();
+        
+        foreach($companies as $company) {
+            $com1=$company->com1;
+            $com2=$company->com2;
+        }
+
+        if(is_null($company->com2)) {
+            $product = Company_product::where('status', 'active')
+                                        ->where('company_id',$com1)
+                                        ->get()->toJson();
+            return response()->json($product);
+        }
+        else {
+            $product = Company_product::where('status', 'active')
+                                        ->whereIn('company_id', [$com1,$com2])
+                                        ->get()->toJson();
+            return response()->json($product); 
+        }
 
     }
     

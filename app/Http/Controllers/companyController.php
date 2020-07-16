@@ -9,6 +9,15 @@ use Illuminate\Http\Request;
 class companyController extends Controller
 {
     public function create(Request $request) {
+
+        $this->validate($request,[
+            'user_id'=>'required|max:20|min:3|unique:\App\User',
+            'sup_name'=>'required|max:100|min:5',
+            'contact_no'=>'required|size:10',
+            'tell_no'=>'required|size:10',
+            'email'=>'required|unique:\App\User',
+        ]);
+
         $company=new Company();
         $company->sup_name=$request->sup_name;
         $company->sup_add=$request->sup_add;
@@ -36,4 +45,13 @@ class companyController extends Controller
     public function view() {
         return view('Admin.add-companies');
     }
+
+    public function gettwo($id) {
+        
+        $city = Company::where('status','active')->whereNotIn('user_id', [$id])->get()->toJson();
+
+        return response()->json($city);
+
+    }
+
 }

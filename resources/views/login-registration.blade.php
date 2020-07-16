@@ -41,7 +41,7 @@
 
     @foreach ($errors->all() as $error)
         <div class="alert-section">
-            <div class="row">
+            <div class="row mt-2">
                 <div class="col-md-3"></div>
                 <div class="col-md-6 d-flex justify-content-center">
                     <div class="alert alert-danger" role="alert">
@@ -56,7 +56,7 @@
     @if(session()->has('message'))
         <div class="alert-section">
             <div class="container">
-                <div class="row">
+                <div class="row mt-2">
                     <div class="col-md-3"></div>
                     <div class="col-md-6 d-flex justify-content-center">
                         <div class="alert alert-warning" role="alert">
@@ -72,7 +72,7 @@
     @if(session()->has('emessage'))
         <div class="alert-section">
             <div class="container">
-                <div class="row">
+                <div class="row mt-2">
                     <div class="col-md-3"></div>
                     <div class="col-md-6 d-flex justify-content-center">
                         <div class="alert alert-danger" role="alert">
@@ -98,7 +98,7 @@
                             @csrf
                                 <div class="form-group">
                                     <label for="user_id">User Name (NIC) :</label>
-                                    <input type="number" class="form-control" name="user_id" id="user_id" placeholder="Enter your id card no...">
+                                    <input type="number" class="form-control" name="user_id" id="user_id" min="1" placeholder="Enter your id card no...">
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Email Address :</label>

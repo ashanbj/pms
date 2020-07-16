@@ -43,7 +43,7 @@
                             <i class="now-ui-icons business_chart-pie-36"></i>
                             Add Province
                         </a>
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="{{ url('admin/edit-province') }}">
                             <i class="now-ui-icons design_bullet-list-67"></i>
                             Edit Province
                         </a>
@@ -60,7 +60,7 @@
                             <i class="now-ui-icons business_chart-pie-36"></i>
                             Add Districts
                         </a>
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="{{ url('admin/edit-district') }}">
                             <i class="now-ui-icons design_bullet-list-67"></i>
                             Edit Districts
                         </a>
@@ -77,7 +77,7 @@
                             <i class="now-ui-icons business_chart-pie-36"></i>
                             Add Cities
                         </a>
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="{{ url('admin/edit-cities') }}">
                             <i class="now-ui-icons design_bullet-list-67"></i>
                             Edit Cities
                         </a>
@@ -100,7 +100,7 @@
                             <i class="now-ui-icons business_chart-pie-36"></i>
                             Add Categories
                         </a>
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="{{ url('admin/edit-product-category') }}">
                             <i class="now-ui-icons design_bullet-list-67"></i>
                             Edit Categories
                         </a>
@@ -298,119 +298,6 @@
             </div>  
         </div>
     </div>
-
-    <div class="row d-flex justify-content-center mt-5">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header pl-3">
-                    <h4>View All Cities</h4>
-                </div>
-                <div class="card-body">
-                    <table class="mdl-data-table table-responsive-xl" id="datatable">
-                        <thead>
-                            <tr>
-                                <th>City No</th>
-                                <th>City Name</th>
-                                <th>District</th>
-                                <th>Province</th>
-                                <th class="text-center">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @isset($city)
-                            @foreach ($city as $item)
-                                <tr>
-                                    <td scope="row">{{$item->city_no}}</td>
-                                    <td>{{$item->city_name}}</td>
-                                    <td>{{$item->dist_name}}</td>
-                                    <td>{{$item->pro_name}}</td>
-                                    <td>
-                                        <div class="btns-group justify-content-center">
-                                            <button id="edit-btn" name="edit-btn" type="button" class="btn btn-warning" data-toggle="modal" data-target="#edit-data" data-id='{{$item->id}}' data-name='{{$item->city_name}}' data-no='{{$item->city_no}}' data-dist='{{$item->dist_name}}' data-pro='{{$item->pro_name}}'>
-                                                Edit
-                                            </button>
-                                            <button id="delete-btn" name="delete-btn" type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-data" data-did='{{$item->id}}'>
-                                                Delete
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach 
-                            @endisset
-
-                            <!-- Edit Modal -->
-                            <div class="modal fade" id="edit-data" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <form action="/edit-city" method="POST">
-                                    @csrf
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Edit City Data</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="form-area">
-                                                    <div class="form-group">
-                                                        <label for="city_no">City No :</label>
-                                                        <input type="text" class="form-control" name="city_no" id="city_no" placeholder="Enter city no..." required>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="city_name">City Name :</label>
-                                                        <input type="text" class="form-control" name="city_name" id="city_name" placeholder="Enter city name..." required>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="dist_name">District :</label>
-                                                        <input type="text" class="form-control" name="dist_name" id="dist_name" placeholder="Enter city name..." readonly>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="pro_name">Province :</label>
-                                                        <input type="text" class="form-control" name="pro_name" id="pro_name" placeholder="Enter city name..." readonly>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer d-flex justify-content-center">
-                                                <button type="button" class="btn btn-secondary mr-4" data-dismiss="modal">Close</button>
-                                                <input type="hidden" id="id" name="id">
-                                                <button type="submit" class="btn btn-success ml-4">Save</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-
-                            <!-- Delete Modal -->
-                            <div class="modal fade" id="delete-data" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <form action="/delete-city" method="POST">
-                                    @csrf
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Delete City Data</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <p>Are You Sure ?</p>
-                                            </div>
-                                            <div class="modal-footer d-flex justify-content-center">
-                                                <button type="button" class="btn btn-secondary mr-4" data-dismiss="modal">Close</button>
-                                                <input type="hidden" id="did" name="did">
-                                                <button type="submit" class="btn btn-danger ml-4">Delete</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                            
-                        </tbody>
-                    </table>
-                </div>
-            </div>  
-        </div>
-    </div>
     
     <div class="row d-flex justify-content-center mt-5 mb-5">
         <div class="col-12">
@@ -419,7 +306,7 @@
                     <h4>View All Companies</h4>
                 </div>
                 <div class="card-body">
-                    <table class="table table-responsive-xl">
+                    <table class="mdl-data-table table-responsive" id="datatable">
                         <thead>
                             <tr>
                                 <th>Supplier Name</th>

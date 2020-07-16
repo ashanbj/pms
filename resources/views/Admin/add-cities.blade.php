@@ -43,7 +43,7 @@
                             <i class="now-ui-icons business_chart-pie-36"></i>
                             Add Province
                         </a>
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="{{ url('admin/edit-province') }}">
                             <i class="now-ui-icons design_bullet-list-67"></i>
                             Edit Province
                         </a>
@@ -60,7 +60,7 @@
                             <i class="now-ui-icons business_chart-pie-36"></i>
                             Add Districts
                         </a>
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="{{ url('admin/edit-district') }}">
                             <i class="now-ui-icons design_bullet-list-67"></i>
                             Edit Districts
                         </a>
@@ -77,7 +77,7 @@
                             <i class="now-ui-icons business_chart-pie-36"></i>
                             Add Cities
                         </a>
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="{{ url('admin/edit-cities') }}">
                             <i class="now-ui-icons design_bullet-list-67"></i>
                             Edit Cities
                         </a>
@@ -100,7 +100,7 @@
                             <i class="now-ui-icons business_chart-pie-36"></i>
                             Add Categories
                         </a>
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="{{ url('admin/edit-product-category') }}">
                             <i class="now-ui-icons design_bullet-list-67"></i>
                             Edit Categories
                         </a>
@@ -167,6 +167,20 @@
 
 @section('content')
 
+    @foreach ($errors->all() as $error)
+    <div class="alert-section">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6 d-flex justify-content-center">
+                <div class="alert alert-danger" role="alert">
+                    <strong>{{ $error }}</strong>
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </div>
+    @endforeach
+
     @if(session()->has('message'))
         <div class="alert-section">
             <div class="row">
@@ -213,7 +227,7 @@
                             <div class="form-group">
                                 <label for="dist_name">District :</label>
                                 <select name="dist_name" id="dist_name" class="form-control" required>
-                                    <option value="" disabled selected >Select District</option>
+                                    <option value="" disabled selected >Select a Province First</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -224,9 +238,11 @@
                 </div>
             </div>  
         </div>
-    </div>    
+    </div>
+     
 @endsection
 
 @section('scripts')
-<script type="text/javascript" src="{{asset('js/get-districts.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/global.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/get-districts-for-city.js')}}"></script>
 @endsection

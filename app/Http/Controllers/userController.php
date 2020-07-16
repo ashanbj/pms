@@ -77,10 +77,12 @@ class userController extends Controller
         if($request->password==$request->com_password) {
             
             if(User::where('user_id',$request->user_id)->count()>0) {
-                return view('login-registration')->with('emessage', 'this user name already exist');
+                Session::flash('emessage','this user name already exist');
+                return view('login-registration');
             }
             else if(User::where('email',$request->email)->count()>0) {
-                return view('login-registration')->with('emessage', 'this email already exist');
+                Session::flash('emessage','this email already exist');
+                return view('login-registration');
             }
             else {
                 $user=new User();
@@ -92,15 +94,15 @@ class userController extends Controller
                 $user->status='active';
                 $user->save();
 
-                $city =  City::where('status','active')->get();
+                $company =  Company::where('status','active')->get();
                 $province =  Province::where('status','active')->get();
-                $district =  District::where('status','active')->get();
-                return view('profile-registration')->with('user_id',$request->user_id)->with('province',$province)->with('district',$district)->with('city',$city);
+                return view('profile-registration')->with('user_id',$request->user_id)->with('province',$province)->with('company',$company);
             }
             
         }
         else {
-            return view('login-registration')->with('emessage', 'passwords are not match');
+            Session::flash('emessage','passwords are not matched');
+            return view('login-registration');
         }
 
        // $mobile=$request->number;
@@ -117,21 +119,49 @@ class userController extends Controller
 
         $mobile=Session::get('r_number');
 
-        $client=new Client();
-        $client->clients_id=$request->user_id;
-        $client->clients_name=$request->clients_name;
-        $client->clients_add=$request->clients_add;
-        $client->pro_name=$request->pro_name;
-        $client->dist_name=$request->dist_name;
-        $client->city_name=$request->city_name;
-        $client->mobile=$mobile;
-        $client->lat=$request->lat;
-        $client->long=$request->long;
-        $client->status='active';
-        $client->save();
+        if(isset($request->com2)) {
 
-        Session::flush();
-        return redirect('/')->with('message', 'successfully create profile login here!');
+            $client=new Client();
+            $client->clients_id=$request->user_id;
+            $client->clients_name=$request->clients_name;
+            $client->clients_add=$request->clients_add;
+            $client->pro_name=$request->pro_name;
+            $client->dist_name=$request->dist_name;
+            $client->city_name=$request->city_name;
+            $client->mobile=$mobile;
+            $client->lat=$request->lat;
+            $client->long=$request->long;
+            $client->com1=$request->com1;
+            $client->com2=$request->com2;
+            $client->status='active';
+            $client->save();
+
+            Session::flush();
+            return redirect('/')->with('message', 'successfully create profile login here!');
+
+        }
+        else {
+
+            //dd($request);
+
+            $client=new Client();
+            $client->clients_id=$request->user_id;
+            $client->clients_name=$request->clients_name;
+            $client->clients_add=$request->clients_add;
+            $client->pro_name=$request->pro_name;
+            $client->dist_name=$request->dist_name;
+            $client->city_name=$request->city_name;
+            $client->mobile=$mobile;
+            $client->lat=$request->lat;
+            $client->long=$request->long;
+            $client->com1=$request->com1;
+            $client->status='active';
+            $client->save();
+
+            Session::flush();
+            return redirect('/')->with('message', 'successfully create profile login here!');
+
+        }
         
     }
 

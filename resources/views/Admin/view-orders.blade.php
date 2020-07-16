@@ -47,7 +47,7 @@
                             <i class="now-ui-icons business_chart-pie-36"></i>
                             Add Province
                         </a>
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="{{ url('admin/edit-province') }}">
                             <i class="now-ui-icons design_bullet-list-67"></i>
                             Edit Province
                         </a>
@@ -64,7 +64,7 @@
                             <i class="now-ui-icons business_chart-pie-36"></i>
                             Add Districts
                         </a>
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="{{ url('admin/edit-district') }}">
                             <i class="now-ui-icons design_bullet-list-67"></i>
                             Edit Districts
                         </a>
@@ -81,7 +81,7 @@
                             <i class="now-ui-icons business_chart-pie-36"></i>
                             Add Cities
                         </a>
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="{{ url('admin/edit-cities') }}">
                             <i class="now-ui-icons design_bullet-list-67"></i>
                             Edit Cities
                         </a>
@@ -104,7 +104,7 @@
                             <i class="now-ui-icons business_chart-pie-36"></i>
                             Add Categories
                         </a>
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="{{ url('admin/edit-product-category') }}">
                             <i class="now-ui-icons design_bullet-list-67"></i>
                             Edit Categories
                         </a>

@@ -7,5 +7,6 @@ var mainSettings = {
         getCategory: "/get-product-category",
         getProvince: "/get-province",
         getClients: "/get-clients",
+        getCompanyTwo: "/get-companytwo",
     }
 }

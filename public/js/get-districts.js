@@ -19,8 +19,8 @@ $(document).ready(function() {
             method: "GET",
         }).done(function(data, status) {
             if (status === "success") {
-                //addDisticts(JSON.parse(data));
-                console.log(JSON.parse(data));
+                addDisticts(JSON.parse(data));
+                //console.log(JSON.parse(data));
             } else {
                 console.error("API Failed");
             }

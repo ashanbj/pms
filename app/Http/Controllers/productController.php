@@ -40,11 +40,16 @@ class productController extends Controller
         }
     }
 
+    public function viewedit() {
+        $product=Product::where('status','active')->get();
+        return view('Admin/edit-product-category')->with('product',$product);
+    }
+
     public function edit(Request $request) {
 
         $this->validate($request,[
-            'category_no'=>'required|max:10',
-            'category_name'=>'required|max:100|min:5'
+            'category_no'=>'required|max:10|unique:\App\Product',
+            'category_name'=>'required|max:100|min:5|unique:\App\Product'
         ]);
 
         //must add DB
@@ -63,6 +68,7 @@ class productController extends Controller
             $product->save();
             return redirect()->back()->with('message', 'successfully edited');
     }
+
     public function delete(Request $request) {
         
         $product = Product::find($request->did);

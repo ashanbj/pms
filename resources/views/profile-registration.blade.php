@@ -29,6 +29,13 @@
 
     <title>Profile Registration</title>
 
+    <style>
+        #map {
+            height: 35.6vh;
+            margin-top: 10px;
+        }        
+    </style>
+
 </head>
 
 <body class="index-page sidebar-collapse">
@@ -41,7 +48,7 @@
 
     @foreach ($errors->all() as $error)
         <div class="alert-section">
-            <div class="row">
+            <div class="row mt-2">
                 <div class="col-md-3"></div>
                 <div class="col-md-6 d-flex justify-content-center">
                     <div class="alert alert-danger" role="alert">
@@ -56,7 +63,7 @@
     @if(session()->has('message'))
         <div class="alert-section">
             <div class="container">
-                <div class="row">
+                <div class="row mt-2">
                     <div class="col-md-3"></div>
                     <div class="col-md-6 d-flex justify-content-center">
                         <div class="alert alert-warning" role="alert">
@@ -72,7 +79,7 @@
     @if(session()->has('emessage'))
         <div class="alert-section">
             <div class="container">
-                <div class="row">
+                <div class="row mt-2">
                     <div class="col-md-3"></div>
                     <div class="col-md-6 d-flex justify-content-center">
                         <div class="alert alert-danger" role="alert">
@@ -104,7 +111,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="clients_add">Pharmacy Address :</label>
-                                            <textarea class="form-control" name="clients_add" id="clients_add" cols="30" rows="5"></textarea>
+                                            <input type="text" class="form-control" name="clients_add" id="clients_add" placeholder="Enter your address...">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
@@ -126,7 +133,7 @@
                                                 <div class="form-group">
                                                     <label for="dist_name">District :</label>
                                                     <select name="dist_name" id="dist_name" class="form-control" required>
-                                                        <option value="" disabled selected >Select District</option>
+                                                        <option value="" disabled selected >Select a Province First</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -134,24 +141,60 @@
                                                 <div class="form-group">
                                                     <label for="city_name">City :</label>
                                                     <select name="city_name" id="city_name" class="form-control" required>
-                                                        <option value="" disabled selected >Select City</option>
+                                                        <option value="" disabled selected >Select a District First</option>
                                                     </select>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row from-row">
+                                        <div class="row from-row mt-3">
                                             <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="lat">Latitude of Your Location :</label>
-                                                    <input type="text" class="form-control" name="lat" id="lat" placeholder="Latitude...">
+                                                <div class="map-area">
+                                                    <div id="map"></div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="long">Longitude of Your Location :</label>
-                                                    <input type="text" class="form-control" name="long" id="long" placeholder="Longitude...">
+                                                <div class="row from-row mt-2">
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                            <label for="lat">Latitude of Your Location :</label>
+                                                            <input type="text" class="form-control" name="lat" id="lat" placeholder="Latitude..." readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                            <label for="long">Longitude of Your Location :</label>
+                                                            <input type="text" class="form-control" name="long" id="long" placeholder="Longitude..." readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <p style="color: red;">Click Map To Locate</p>
+                                                    </div>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="row from-row mt-4">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="com1">Select Company One :</label>
+                                                    <select name="com1" id="com1" class="form-control" required>
+                                                        <option value="" disabled selected >Select a Company</option>
+                                                    @isset($company)
+                                                        @foreach ($company as $com)
+                                                            <option value="{{$com->user_id}}">{{$com->sup_name}}</option>
+                                                        @endforeach
+                                                    @endisset
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="com2">Select Company Two :</label>
+                                                    <select name="com2" id="com2" class="form-control">
+                                                        <option value="" disabled selected >Select First Company</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4"> </div>
                                         </div>
                                     </div>
                                 </div>
@@ -181,8 +224,10 @@
     <script type="text/javascript" src="{{asset('js/now-ui-kit.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/loader.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/global.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/get-districts.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/get-cities.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/get-data-for-profile-registration.js')}}"></script>
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtlwcov50Y0-MKAlkWmzx5sdYJY2HeFh4&callback=initMap"></script>
+    <script type="text/javascript" src="{{asset('js/location-catch.js')}}"> </script>
     <!--end ofcore js files-->
     
     <!-- Alert Dismiss scripts -->
