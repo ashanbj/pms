@@ -9,7 +9,65 @@
 @endsection
 
 @section('navbar')
-<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+
+<nav class="navbar navbar-expand-lg fixed-top navbar-transparent" style="background:#343a40 !important ;">
+    <div class="container">
+
+
+        <div class="navbar-translate">
+            <a class="navbar-brand" href="#">
+                PMS
+            </a>
+            <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+                aria-controls="navigation-index" aria-expanded="true" aria-label="Toggle navigation">
+                <span class="navbar-toggler-bar top-bar"></span>
+                <span class="navbar-toggler-bar middle-bar"></span>
+                <span class="navbar-toggler-bar bottom-bar"></span>
+            </button>
+        </div>
+
+        <div class="navbar-collapse justify-content-end has-image collapse show" id="navigation" style="background:#343a40;">
+            <ul class="navbar-nav">
+
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('chemist/dashboard') }}">
+                        <i class="now-ui-icons design_app"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+                <li class="nav-item dropdown active">
+                    <a href="#" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink4" data-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="now-ui-icons design_app"></i>
+                        <p>Orders</p>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink4">
+                        <a class="dropdown-item" href="{{ url('chemist/place-order') }}">
+                            <i class="now-ui-icons business_chart-pie-36"></i>
+                            Place Order
+                        </a>
+                        <a class="dropdown-item" href="#">
+                            <i class="now-ui-icons design_bullet-list-67"></i>
+                            View Orders
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" rel="tooltip" title="" data-placement="bottom"
+                    href="{{ url('logout') }}" 
+                        data-original-title="Log Out">
+                        <i class="material-icons sign-out-icon">settings_power</i>
+                        <p class="d-lg-none d-xl-none">Log Out</p>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+{{-- <nav class="navbar navbar-expand-lg navbar-light bg-dark">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
     </button>
@@ -30,7 +88,7 @@
         <a class="nav-link text-uppercase" href="{{ url('logout') }}">Logout</a>
     </form>
     </div>
-</nav>
+</nav> --}}
 @endsection
 
 @section('content')

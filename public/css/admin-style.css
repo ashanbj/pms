@@ -1,9 +1,8 @@
-
-
 body {
     font-family: "Poppins", sans-serif;
     height: 100vh;
 }
+
 
 /* alert section */
 
@@ -26,9 +25,14 @@ body {
     margin-right: 2px;
     outline: none;
 }
+
+
 /* end of alert section */
 
-
+.navbar-brand {
+    top: -5px;
+    position: relative;
+}
 
 .form-group .btn {
     background: blueviolet;
@@ -52,4 +56,3 @@ body {
     margin-left: 5px;
     width: 60px;
 }
-

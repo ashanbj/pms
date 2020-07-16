@@ -47,7 +47,7 @@
     </div>
     <!-- end of loader erea -->
 
-    <div class="container">
+    <div class="container" style="margin-top: 6rem !important">
         @yield('content')
     </div>
     
