@@ -1,0 +1,19 @@
+.btn-new-line {
+    padding: 0;
+    margin-left: 20px;
+    background: transparent;
+}
+
+.btn-new-line:focus,
+.btn-new-line:hover {
+    background: transparent;
+}
+
+.btn-new-line i {
+    font-size: 30px;
+    color: tomato;
+}
+.for-readonly input[type=text],
+.for-readonly input[type=number] {
+    color: #000;
+}

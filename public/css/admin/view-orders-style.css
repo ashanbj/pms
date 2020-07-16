@@ -1,0 +1,14 @@
+.btn.btnnn {
+    width: 120px;
+}
+.btn.btn-mark {
+    background: #44c74e;
+}
+.btn.btn-delivered {
+    background: #7171a782;
+    color: #000000d1;
+}
+.delivered-area {
+    pointer-events: none;
+    cursor: not-allowed;
+}

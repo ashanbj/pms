@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    height: 100vh;
+    background-color: rgba(28,206,234,0.82);background: linear-gradient(150deg,#281483 15%,#8f6ed5 70%,#d782d9 94%);
+}
+
+/* alert section */
+
+.alert-section {
+    margin-top: 20px;
+  }
+  
+  .alert-section label {
+    display: flex;
+  }
+  
+  .alert-section .alert {
+    position: fixed;
+    z-index: 2;
+    padding-left: 25px;
+    border-radius: 15px;
+  }
+  
+  .alert-section .alert strong {
+    font-family: 'abhaya';
+  }
+  
+  .alert-section .alert button {
+    margin-right: 2px;
+    outline: none;
+  }
+  /* end of alert section */
+
+.form-control:focus {
+    border: 1px solid blueviolet;
+}
+
+.header {
+    color: #fff;
+}
+
+.btns-group .btn-custom {
+    color: #fff;
+    background-color: #ee5050;
+    border-color: #ee5050;
+    box-shadow: 0 0.125rem 0.25rem rgba(13,20,49,.07);
+    border: .0625rem solid transparent;
+    padding: .5rem 1.25rem;
+    font-size: 20px;
+}
+
+.header p a {
+    color: #fff;
+}
+
+.header input[readOnly] {
+    color: #fff;
+    background: transparent !important;
+    cursor: default;
+}
+
+.header input {
+    background: transparent !important;
+    color: #fff;
+}
+
+.header input:focus {
+
+    color: #fff;
+}
+
+.header ::placeholder {
+    color: #fff;
+    opacity: 1; /* Firefox */
+}
+

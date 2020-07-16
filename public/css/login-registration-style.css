@@ -1,0 +1,52 @@
+body {
+    font-family: "Poppins", sans-serif;
+    height: 100vh;
+}
+
+/* alert section */
+
+.alert-section label {
+    display: flex;
+}
+
+.alert-section .alert {
+    position: fixed;
+    z-index: 2;
+    padding-left: 25px;
+    border-radius: 15px;
+}
+
+.alert-section .alert strong {
+    font-family: 'abhaya';
+}
+
+.alert-section .alert button {
+    margin-right: 2px;
+    outline: none;
+}
+/* end of alert section */
+
+
+
+.form-group .btn {
+    background: blueviolet;
+}
+
+.form-control:focus {
+    border: 1px solid blueviolet;
+}
+
+.form-control option {
+    font-size: 17px;
+}
+
+.btns-group {
+    display: flex;
+}
+
+.btns-group .btn {
+    padding: 5px;
+    margin: 0;
+    margin-left: 5px;
+    width: 60px;
+}
