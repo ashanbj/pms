@@ -2,7 +2,7 @@
 
 @section('style-css')
     <link rel="stylesheet" href="{{asset('css/admin/view-orders-style.css')}}">
-    {{-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" /> --}}
+    <link rel="stylesheet" href="{{asset('datepicker/daterangepicker.css')}}">
 @endsection
 
 @section('title')
@@ -192,27 +192,29 @@
             <div class="card">
                 <div class="card-header pl-3">
                     <h4>View All Orders</h4>
-                    {{-- <div class="search-panel" id="search-panel">
-                        <form>
+                    <div class="search-panel" id="search-panel">
+                        <form action="/search-oders" method="POST">
                             @csrf 
                             <div class="row mt-5">
-                                <div class="col-md-2">
+                                <div class="col-md-7"></div>
+                                <div class="col-md-3">
                                     <div class="form-row">
                                         <div class="form-group">
-                                            <input type="text" name="dates">
+                                            <label for="config-dem">Date Range Search (Active Orders) :</label>
+                                            <input type="text" name="date_range" id="config-dem" value="07/17/2020 - 07/17/2020" class="form-control">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-row">
                                         <div class="form-group">
-                                            <input type="submit" class="form-control btn" id="search-range"  class="fadeIn fourth" value="Search">
+                                            <input type="submit" style="margin-top: 30px;" class="form-control btn" id="search-range"  class="fadeIn fourth" value="Search">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </form>
-                    </div> --}}
+                    </div>
                 </div>
                 <div class="card-body">
                     <table class="mdl-data-table table-responsive-xl" id="datatable">
@@ -274,12 +276,13 @@
 @endsection
 
 @section('scripts')
-
-    {{-- <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-   
+    <script type="text/javascript" src="{{asset('datepicker/moment.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('datepicker/daterangepicker.js')}}"></script>
+    
     <script>
-        $('input[name="dates"]').daterangepicker();
-    </script> --}}
+        $('#config-demo').daterangepicker({
+            "timePicker": true,
+        });
+    </script>
 
 @endsection

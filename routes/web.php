@@ -60,6 +60,7 @@ Route::post('/edit-product-category','productController@edit');
 Route::post('/delete-product-categoey','productController@delete');
 Route::post('/search-clients','clientController@search');
 Route::get('/mark_order_as_delivered/{id}','orderController@mark');
+Route::post('/search-oders','orderController@search');
 
 
 
