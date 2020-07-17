@@ -185,7 +185,7 @@
                     <h4>Create Products</h4>
                 </div>
                 <div class="card-body">
-                    <form action="/create-pharma-product" method="POST">
+                    <form action="/create-pharma-product" method="POST" id="product_form">
                         @csrf
                         <table class="table table-responsive-xl" id="product-table">
                             <thead>
@@ -208,20 +208,18 @@
                                     <td>
                                         <div class="col-12">
                                             <div class="form-group">
-                                                <input type="number" class="form-control" name="product_price[]" id="product_price" min="0" value="0.00" step=".01" placeholder="Enter product price..." required>
+                                                <input type="number" class="form-control product_price" name="product_price[]" id="product_price" min="0" value="0.00" step=".01" placeholder="Enter product price..." required>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="col-12">
                                             <div class="form-group">
-                                                <select name="product_category_id[]" id="product_category_id" class="form-control .product_category" required>
-                                                    <option value="" selected>Select a Category</option>
+                                                <select name="product_category_id[]" id="product_category_id" class="form-control product_category" required>
+                                                    <option value="" disabled selected>Select a Category</option>
                                                     @isset($mproduct)
                                                         @foreach ($mproduct as $pro)
-                                                            {{-- <option value="{{$pro->id}}|{{$pro->category_name}}">{{$pro->category_name}}</option> --}}
                                                             <option value='[{"name":"{{$pro->category_name}}"},{"id":"{{$pro->id}}"}]'>{{$pro->category_name}}</option>
-
                                                         @endforeach
                                                     @endisset
                                                 </select>
@@ -258,6 +256,9 @@
                         </form>
                         
                     </div>
+                    <div class="form-group float-right ml-3">
+                        <a href="/download-sample" class="btn ml-3 btn-primary" style="background: #2d2a2a">Download Sample</a>
+                    </div>
                 </div>
             </div>  
         </div>
@@ -267,50 +268,92 @@
 
 
 @section('scripts')
-    <!-- send data to delete modal -->
-    <script>
-        $(document).on("click", "#delete-btn", function () {
-            var getid = $(this).data('id');
-            
-            $("#id").val(getid);
-        });
-    </script>
 
-    <script>
-        function addNewRow() {
+<script>
 
-            var jsonArray= "[{'name':'{{$pro->category_name}}'},{'id':'{{$pro->id}}'}]";
-
-            var table = document.getElementById("product-table");
-            var row = table.insertRow(-1);
-            var cell0 = row.insertCell(0);
-            var cell1 = row.insertCell(1);
-            var cell2 = row.insertCell(2);
-            var cell3 = row.insertCell(3);
-            cell0.innerHTML = '<div class="col-12"> <div class="form-group"> <input type="text" class="form-control" name="product_name[]" id="product_name" placeholder="Enter product name..." required> </div> </div>';
-            cell1.innerHTML = '<div class="col-12"> <div class="form-group"> <input type="number" class="form-control" name="product_price[]" id="product_price" placeholder="Enter product price..." required> </div> </div>';
-            cell2.innerHTML = "<div class='col-12'> <div class='form-group'> <select name='product_category_id[]' id='product_category' class='form-control' required> <option value='' selected>Select a Category</option> @isset($mproduct) @foreach ($mproduct as $pro) <option value='[{\"name\":\"{{$pro->category_name}}\"},{\"id\":\"{{$pro->id}}\"}]'>{{$pro->category_name}}</option> @endforeach @endisset </select> </div> </div>";
-            cell3.innerHTML = '<div class="btn-group"> <button type="button" class="btn btn-danger py-1 px-2" onclick="deleteThisRow(this);"> <i class="fas fa-backspace"></i> </button> <input type="hidden" name="status[]" value="active"> <input type="hidden" name="company_id[]" value="{{$user}}" </div>';
-        }
-
-        //function deleteTableRow() {
-        //    document.getElementById("product-table").deleteRow(-1);
-        //}
-    </script>
-
-    <script>
-        function deleteThisRow(btndel) {
-            if (typeof(btndel) == "object") {
-                $(btndel).closest("tr").remove();
-            } else {
-                return false;
-            }
-        }
-
-
-        document.getElementById("file").onchange = function() {
+    document.getElementById("file").onchange = function() {
         document.getElementById("upload-form").submit();
-}
-    </script>
+    }
+
+    selectSearch();
+
+    $("#product-table").on("change", ".product_category", function(e){
+        addNewRow();
+    });
+
+    $('#product_form').on('keyup keypress', function(e) {
+        var keyCode = e.keyCode || e.which;
+        if (keyCode === 13) { 
+          e.preventDefault();
+          return false;
+        }
+    });
+
+    function addNewRow() {
+        var tableRow =  '<tr>'+
+                            '<td scope="row">'+
+                                '<div class="col-12">'+
+                                    '<div class="form-group">'+
+                                        '<input type="text" class="form-control" name="product_name[]" id="product_name" placeholder="Enter product name..." onchange="selectSearchNewLine(this)" required>'+
+                                    '</div>'+
+                                '</div>'+
+                            '</td>'+
+                            '<td>'+
+                                '<div class="col-12">'+
+                                    '<div class="form-group">'+
+                                        '<input type="number" class="form-control" name="product_price[]" id="product_price" min="0" value="0.00" step=".01" placeholder="Enter product price..." required>'+
+                                    '</div>'+
+                                '</div>'+
+                            '</td>'+
+                            '<td>'+
+                                '<div class="col-12">'+
+                                    '<div class="form-group">'+
+                                        '<select name="product_category_id[]" id="product_category_id" class="form-control product_category" required>'+
+                                            '<option value="" selected>Select a Category</option>'+
+                                            '@isset($mproduct)'+
+                                                '@foreach ($mproduct as $pro)'+
+                                                    '<option value=\'[{"name":"{{$pro->category_name}}"},{"id":"{{$pro->id}}"}]\'>{{$pro->category_name}}</option>'+
+                                                '@endforeach'+
+                                            '@endisset'+
+                                        '</select>'+
+                                    '</div>'+
+                                '</div>'+
+                            '</td>'+
+                            '<td>'+
+                                '<div class="btn-group">'+
+                                    '<button type="button" class="btn btn-danger py-1 px-2" onclick="deleteThisRow(this);">'+
+                                        '<i class="fas fa-backspace"></i>'+
+                                    '</button>'+
+                                    '<input type="hidden" name="status[]" value="active">'+
+                                    '<input type="hidden" name="company_id[]" value="{{$user}}">'+
+                                '</div>'+
+                            '</td>'+
+                        '</tr>'
+
+        $('#product-table > tbody:last-child').append(tableRow);
+    }
+    
+    function deleteThisRow(btndel) {
+        if (typeof(btndel) == "object") {
+            $(btndel).closest("tr").remove();
+        } else {
+            return false;
+        }
+    }
+    
+    function selectSearch() {
+        $( "tr" ).last().find('.product_category').selectize({
+            sortField: 'text',
+        });
+    }
+    
+    function selectSearchNewLine(clickedInput) {
+        var parentElm= $(clickedInput).closest("tr");
+        parentElm.find('.product_category').selectize({
+            sortField: 'text',
+        });
+    } 
+
+</script>
 
 @endsection

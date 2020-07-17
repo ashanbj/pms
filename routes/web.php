@@ -85,6 +85,7 @@ Route::post('/place-order-action', 'Chemist\orderController@create');
 
 Route::get('/export_excel/{id}', 'ExportExcelController@view');
 Route::get('/export_excel/download/{id}', 'ExportExcelController@excel');
+Route::get('/download-sample', 'ExportExcelController@samplecsv');
 
 
 

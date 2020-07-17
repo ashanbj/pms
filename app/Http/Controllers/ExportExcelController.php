@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\OrderExport;
+use App\Exports\SampleExport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -68,6 +69,13 @@ class ExportExcelController extends Controller {
     public function excel($id) {
         //return (new OrderExport)->forId($id)->download('order-list.xlsx'); //use other excel to use this
         return Excel::download((new OrderExport)->forId($id), 'order-list.xlsx');
+     
+    }
+
+    public function samplecsv() {
+        return Excel::download((new SampleExport), 'sample-product-list.csv');
+        //return (new SampleExport)->download('invoices.xlsx');
+
      
     }
     
