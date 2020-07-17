@@ -201,7 +201,7 @@
                                     <div class="form-row">
                                         <div class="form-group">
                                             <label for="config-dem">Date Range Search (Active Orders) :</label>
-                                            <input type="text" name="date_range" id="config-dem" value="07/17/2020 - 07/17/2020" class="form-control">
+                                            <input type="text" name="date_range" id="config-dem" class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -283,6 +283,22 @@
         $('#config-demo').daterangepicker({
             "timePicker": true,
         });
+
+        setRange();
+
+        function setRange() {
+
+            var date = new Date();
+            var last = new Date(date.getTime() - (7 * 24 * 60 * 60 * 1000));
+            var beforeDay = last.getDate();
+            var month=last.getMonth()+1;
+            var thisMonth=date.getMonth()+1;
+            var year=last.getFullYear();
+            var dateRange = month+'/'+beforeDay+'/'+year+' - '+thisMonth+'/'+date.getDate()+'/'+date.getFullYear(); 
+            $('#config-dem').val(dateRange);
+            //console.log(month+'/'+beforeDay+'/'+year+' - '+thisMonth+'/'+date.getDate()+'/'+date.getFullYear());
+        }
+
     </script>
 
 @endsection
