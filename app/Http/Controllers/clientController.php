@@ -16,7 +16,14 @@ class clientController extends Controller
     public function search(Request $request) {
 
         if( !isset($request->pro_name) && !isset($request->city_name) && !isset($request->dist_name) && !isset($request->clients_name) ) {
-            Session::flash('dmessage','Select an item to search');
+            // Session::flash('dmessage','Select an item to search');
+            $cities =  City::where('status','active')->get();
+            $company =  Company::where('status','active')->get();
+            $province =  Province::all();
+            $district =  District::all();
+            $client=Client::where('status','active')->get();
+            Session::flash('message','All Clients');
+            return view('Admin/dashboard')->with('city',$cities)->with('province',$province)->with('district',$district)->with('company',$company)->with('client',$client);
         }
         else if( isset($request->pro_name) && isset($request->city_name) && isset($request->dist_name) && isset($request->clients_name) ) {
             if(Client::where('pro_name',$request->pro_name)->where('city_name',$request->city_name)->where('dist_name',$request->dist_name)->where('clients_name',$request->clients_name)->count()==0) {
@@ -154,6 +161,20 @@ class clientController extends Controller
                 $province =  Province::all();
                 $district =  District::all();
                 $client=Client::where('city_name',$request->city_name)->where('clients_name',$request->clients_name)->get();
+                Session::flash('message','Data Found');
+                return view('Admin/dashboard')->with('city',$cities)->with('province',$province)->with('district',$district)->with('company',$company)->with('client',$client);
+            }
+        }
+        else if( isset($request->pro_name) && !isset($request->city_name) && isset($request->dist_name) && !isset($request->clients_name) ) {
+            if(Client::where('pro_name',$request->pro_name)->where('dist_name',$request->dist_name)->count()==0) {
+                Session::flash('emessage','No data found');
+            }
+            else {
+                $cities =  City::where('status','active')->get();
+                $company =  Company::where('status','active')->get();
+                $province =  Province::all();
+                $district =  District::all();
+                $client=Client::where('pro_name',$request->pro_name)->where('dist_name',$request->dist_name)->get();
                 Session::flash('message','Data Found');
                 return view('Admin/dashboard')->with('city',$cities)->with('province',$province)->with('district',$district)->with('company',$company)->with('client',$client);
             }
