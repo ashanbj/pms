@@ -2,6 +2,7 @@
 
 @section('style-css')
     <link rel="stylesheet" href="{{asset('css/admin/view-orders-style.css')}}">
+    {{-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" /> --}}
 @endsection
 
 @section('title')
@@ -191,6 +192,27 @@
             <div class="card">
                 <div class="card-header pl-3">
                     <h4>View All Orders</h4>
+                    {{-- <div class="search-panel" id="search-panel">
+                        <form>
+                            @csrf 
+                            <div class="row mt-5">
+                                <div class="col-md-2">
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <input type="text" name="dates">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <input type="submit" class="form-control btn" id="search-range"  class="fadeIn fourth" value="Search">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div> --}}
                 </div>
                 <div class="card-body">
                     <table class="mdl-data-table table-responsive-xl" id="datatable">
@@ -207,7 +229,13 @@
                             @isset($orders)
                             @foreach ($orders as $item)
                                 <tr>
-                                    <td scope="row" class="text-center">PO No:PMS00{{$item->order_no}}</td>
+                                    @if ($item->order_no <=9)
+                                        <td scope="row" class="text-center">PO No: PMS000{{$item->order_no}}</td>
+                                    @elseif ($item->order_no <=99)
+                                        <td scope="row" class="text-center">PO No: PMS00{{$item->order_no}}</td>
+                                    @else
+                                        <td scope="row" class="text-center">PO No: PMS0{{$item->order_no}}</td>
+                                    @endif
                                     <td>{{$item->updated_at->format('j F, Y')}}</td>
                                     <td>{{number_format((float)$item->total_amount, 2, '.', '')}}</td>
                                     <td class="text-center">
@@ -243,4 +271,15 @@
             </div>  
         </div>
     </div>   
+@endsection
+
+@section('scripts')
+
+    {{-- <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+   
+    <script>
+        $('input[name="dates"]').daterangepicker();
+    </script> --}}
+
 @endsection

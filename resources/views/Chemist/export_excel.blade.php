@@ -29,7 +29,14 @@
                         <div class="col-4">
                             <div class="form-group for-readonly">
                                 <label for="order_no">Order Details</label>
+                                @if ($order_list[0]['order_no'] <=9)
+                                    <input type="text" class="form-control mb-1" value="PO : PMS000{{$order_list[0]['order_no']}}" disabled>
+                                @elseif ($order_list[0]['order_no'] <=99)
                                     <input type="text" class="form-control mb-1" value="PO : PMS00{{$order_list[0]['order_no']}}" disabled>
+                                @else
+                                    <input type="text" class="form-control mb-1" value="PO : PMS0{{$order_list[0]['order_no']}}" disabled>
+                                @endif
+                                    {{-- <input type="text" class="form-control mb-1" value="PO : PMS00{{$order_list[0]['order_no']}}" disabled> --}}
                                     <input type="text" class="form-control mb-1" value="Client Name : {{$order_list[0]['clients_name']}}" disabled>
                                     <input type="text" class="form-control mb-1" value="Client Address : {{$order_list[0]['clients_add']}}" disabled>
                                     <input type="text" class="form-control" value="Orderd Date : {{date_create($order_list[0]['updated_at'])->format('j F, Y')}}" disabled>

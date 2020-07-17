@@ -63,7 +63,17 @@ class OrderExport implements FromArray, ShouldAutoSize {
                 
             }
 
-            $new_order_no='PMS00'.$order_no.'';
+            if($order_no <= 9) {
+                $new_order_no='PMS000'.$order_no.'';
+            }
+            else if($order_no <= 99) {
+                $new_order_no='PMS00'.$order_no.'';
+            }
+            else {
+                $new_order_no='PMS0'.$order_no.'';
+            }
+
+            //$new_order_no='PMS00'.$order_no.'';
             //dd($new_order_no);
 
             $array_list = json_decode($list, true);
@@ -116,7 +126,17 @@ class OrderExport implements FromArray, ShouldAutoSize {
             }
             //dd($order_date);
 
-            $new_order_no='PMS00'.$order_no.'';
+            if($order_no <= 9) {
+                $new_order_no='PMS000'.$order_no.'';
+            }
+            else if($order_no <= 99) {
+                $new_order_no='PMS00'.$order_no.'';
+            }
+            else {
+                $new_order_no='PMS0'.$order_no.'';
+            }
+
+            //$new_order_no='PMS00'.$order_no.'';
 
             array_unshift($normal_list, array('Product Category','Product Name','Product Price', 'Product Quantity', 'Product Amount'));
             array_unshift($normal_list, array('','','', '', ''));

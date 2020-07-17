@@ -215,7 +215,7 @@
                 <div class="card-header pl-3">
                     <h4>View All clients</h4>
                     <div class="search-panel" id="search-panel">
-                        <form action="/search-clients" method="POST">
+                        <form action="/search-clients" method="POST" id="search-form">
                             @csrf 
                             <div class="row">
                                 <div class="col-md-8">
@@ -259,7 +259,7 @@
                                 <div class="col-md-2 mt-5">
                                     <div class="form-row row d-flex justify-content-end mr-5">
                                         <div class="form-group">
-                                            <input type="submit" class="form-control btn"  class="fadeIn fourth" value="Search">
+                                            <input type="submit" class="form-control btn" id="search"  class="fadeIn fourth" value="Search">
                                         </div>
                                     </div>
                                 </div>
@@ -273,10 +273,10 @@
                             <tr>
                                 <th>Name</th>
                                 <th>Address</th>
-                                <th>City</th>
+                                <th>Contact No.</th>
                                 <th>District</th>
                                 <th>Province</th>
-                                <th>Photograph</th>
+                                {{-- <th>Photograph</th> --}}
                             </tr>
                         </thead>
                         <tbody>
@@ -285,7 +285,7 @@
                                 <tr>
                                     <td scope="row">{{$cl->clients_name}}</td>
                                     <td>{{$cl->clients_add}}</td>
-                                    <td>{{$cl->city_name}}</td>
+                                    <td>{{$cl->mobile}}</td>
                                     <td>{{$cl->dist_name}}</td>
                                     <td>{{$cl->pro_name}}</td>
                                 </tr>
@@ -306,15 +306,15 @@
                     <h4>View All Companies</h4>
                 </div>
                 <div class="card-body">
-                    <table class="mdl-data-table table-responsive" id="datatable">
+                    <table class="mdl-data-table table-responsive-xl" id="datatable">
                         <thead>
                             <tr>
                                 <th>Supplier Name</th>
                                 <th>Supplier Address</th>
                                 <th>Contact Person</th>
                                 <th>Contact No</th>
-                                <th>Tell No</th>
-                                <th>Designation</th>
+                                {{-- <th>Tell No</th>
+                                <th>Designation</th> --}}
                                 <th>Email</th>
                             </tr>
                         </thead>
@@ -326,8 +326,8 @@
                                     <td>{{$com->sup_add}}</td>
                                     <td>{{$com->contact_per}}</td>
                                     <td>{{$com->contact_no}}</td>
-                                    <td>{{$com->tell_no}}</td>
-                                    <td>{{$com->designation}}</td>
+                                    {{-- <td>{{$com->tell_no}}</td>
+                                    <td>{{$com->designation}}</td> --}}
                                     <td>{{$com->email}}</td>
                                 </tr>
                             @endforeach 

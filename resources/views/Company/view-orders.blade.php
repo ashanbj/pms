@@ -167,7 +167,13 @@
                             @isset($company_amount)
                             @foreach ($company_amount as $item)
                                 <tr>
-                                    <td scope="row" class="text-center">PO No:PMS00{{$item->order_no}}</td>
+                                    @if ($item->order_no <=9)
+                                        <td scope="row" class="text-center">PO No: PMS000{{$item->order_no}}</td>
+                                    @elseif ($item->order_no <=99)
+                                        <td scope="row" class="text-center">PO No: PMS00{{$item->order_no}}</td>
+                                    @else
+                                        <td scope="row" class="text-center">PO No: PMS0{{$item->order_no}}</td>
+                                    @endif
                                     <td>{{($item->updated_at)->format('j F, Y')}}</td>
                                     <td>{{number_format((float)$item->company_total, 2, '.', '')}}</td>
                                     @if ($item->status=='active')

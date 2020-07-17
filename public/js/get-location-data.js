@@ -26,6 +26,11 @@ $(document).ready(function() {
 
     });
 
+    $("#search-panel").on("change", "#clients_name", function(e) {
+        e.preventDefault();
+        document.getElementById('search-form').submit()
+    });
+
 
     function loadProvince() {
 
