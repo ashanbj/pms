@@ -86,45 +86,17 @@
     </div>
 </nav>
 
-{{-- <nav class="navbar navbar-expand-lg navbar-light bg-dark">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-    <a class="navbar-brand pl-3" href="#">PMS</a>
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-        <li class="nav-item active">
-            <a class="nav-link" href="{{ url('company/dashboard') }}">Dashboard <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ url('company/add-products') }}">Add Products</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ url('company/add-emails') }}">Email List</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ url('company/view-orders') }}">View Orders</a>
-        </li>
-    </ul>
-    <ul class="my-2 my-lg-0">
-
-    </ul>
-    <form class="my-2 my-lg-0">
-        <a class="nav-link text-uppercase" href="{{ url('logout') }}">Logout</a>
-    </form>
-    </div>
-</nav> --}}
 @endsection
 
 @section('content')
 
-    @if(session()->has('emessage'))
+    @if(session()->has('message'))
         <div class="alert-section">
             <div class="row">
                 <div class="col-md-3"></div>
                 <div class="col-md-6 d-flex justify-content-center">
                     <div class="alert alert-success" role="alert">
-                        <strong>{{ session()->get('emessage') }}</strong>
+                        <strong>{{ session()->get('message') }}</strong>
                     </div>
                 </div>
                 <div class="col-md-3"></div>
@@ -159,7 +131,7 @@
                                 <th class="text-center">Product Name</th>
                                 <th>Price</th>
                                 <th>Product Category</th>
-                                <th>Delete</th>
+                                <th class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -171,6 +143,9 @@
                                     <td>{{$item->product_category}}</td>
                                     <td>
                                         <div class="btns-group justify-content-center">
+                                            <button id="edit-btn" name="edit-btn" type="button" class="btn btn-warning" data-toggle="modal" data-target="#edit-data" data-pid='{{$item->id}}' data-name='{{$item->product_name}}' data-price='{{$item->product_price}}' data-category='{{$item->product_category}}'>
+                                                Edit
+                                            </button>
                                             <button id="delete-btn" name="delete-btn" type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-data" data-id='{{$item->id}}'>
                                                 Delete
                                             </button>
@@ -179,6 +154,44 @@
                                 </tr>
                             @endforeach 
                             @endisset
+
+                            <!-- Edit Modal -->
+                            <div class="modal fade" id="edit-data" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <form action="/edit-product-price" method="POST">
+                                    @csrf
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Edit Product Price</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="form-area">
+                                                    <div class="form-group">
+                                                        <label for="product_name">Product Name :</label>
+                                                        <input type="text" class="form-control" name="product_name" id="product_name" readonly>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="product_price">Product Price :</label>
+                                                        <input type="text" class="form-control" name="product_price" id="product_price" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="product_category">Product Category :</label>
+                                                        <input type="text" class="form-control" name="product_category" id="product_category" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer d-flex justify-content-center">
+                                                <button type="button" class="btn btn-secondary mr-4" data-dismiss="modal">Close</button>
+                                                <input type="hidden" id="pid" name="id">
+                                                <button type="submit" class="btn btn-success ml-4">Save</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
 
                             <!-- Delete Modal -->
                             <div class="modal fade" id="delete-data" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
@@ -283,6 +296,22 @@
 
 
 @section('scripts')
+
+    <!-- send data to edit modal-->
+    <script>
+        $(document).on("click", "#edit-btn", function () {
+            var getid = $(this).data('pid');
+            var getProductName = $(this).data('name');
+            var getProductPrice= $(this).data('price');
+            var getProductCategory= $(this).data('category');
+            
+            $("#pid").val(getid);
+            $("#product_name").val(getProductName);
+            $("#product_price").val(getProductPrice);
+            $("#product_category").val(getProductCategory);
+        });
+    </script>
+
     <!-- send data to delete modal -->
     <script>
         $(document).on("click", "#delete-btn", function () {

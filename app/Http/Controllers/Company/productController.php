@@ -48,6 +48,17 @@ class productController extends Controller {
             }
             return redirect()->back()->with('message', 'successfully added');
     }
+
+    public function edit(Request $request) {
+
+        $this->validate($request,[
+            'product_price'=>'required',
+        ]);       
+            $product=Company_product::find($request->id);
+            $product->product_price=$request->product_price;
+            $product->save();
+            return redirect()->back()->with('message', 'successfully edited');
+    }
     
     public function delete(Request $request) {
         $city = Company_product::find($request->id);

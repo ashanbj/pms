@@ -125,44 +125,6 @@
         </div>
     </div>
 </nav>
-
-{{-- <nav class="navbar navbar-expand-lg navbar-light bg-dark">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-    <a class="navbar-brand pl-3" href="#">PMS</a>
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-        <li class="nav-item">
-            <a class="nav-link" href="{{ url('admin/dashboard') }}">Dashboard</span></a>
-        </li>
-        <li class="nav-item active">
-            <a class="nav-link" href="{{ url('admin/add-province') }}">Add Province <span class="sr-only">(current)</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ url('admin/add-district') }}">Add District</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ url('admin/add-cities') }}">Add Cities</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ url('admin/add-companies') }}">Add Companies</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ url('admin/add-products') }}">Add Product Category</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ url('admin/view-orders') }}">View Orders</a>
-        </li>
-    </ul>
-    <ul class="my-2 my-lg-0">
-
-    </ul>
-    <form class="my-2 my-lg-0">
-        <a class="nav-link text-uppercase" href="{{ url('logout') }}">Logout</a>
-    </form>
-    </div>
-</nav> --}}
 @endsection
 
 

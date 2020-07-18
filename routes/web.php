@@ -71,6 +71,7 @@ Route::get('/company/add-emails', 'Company\emailController@view')->middleware('c
 Route::get('/company/view-orders', 'Company\orderController@view')->middleware('company_check');
 
 Route::post('/create-pharma-product', 'Company\productController@create');
+Route::post('/edit-product-price', 'Company\productController@edit');
 Route::post('/delete-pharma-product', 'Company\productController@delete');
 Route::post('/create-email', 'Company\emailController@create');
 Route::post('/delete-email', 'Company\emailController@delete');

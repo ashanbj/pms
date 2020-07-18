@@ -97,8 +97,8 @@ $(document).ready(function() {
             $("tr").find(".product_name").html(emptyOption);
         }
 
-        var newElm = $(this).last("tr");
-        newElm.find(".product_name").show();
+        var newElm = $('#product-table').last("tr");
+        newElm.find(".product_name").focus();
         selectSearch();
     }
 
